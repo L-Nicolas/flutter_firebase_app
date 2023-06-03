@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tp_flutter_firebase/posts_screen/analytics/analytics_provider.dart';
+import 'package:tp_flutter_firebase/posts_screen/analytics/firebase_analytics_handler.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/local_posts_data_source.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/remote_posts_data_source.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_repository_provider.dart';
@@ -22,25 +24,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostsRepositoryProvider(
-        postsRepository: PostsRepository(
-        localDataSource: LocalPostsDataSource(),
-        remoteDataSource: RemotePostsDataSource(),
-      ),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: const TextTheme(
-            bodySmall: TextStyle(
-              fontSize: 20,
-              color: Colors.green,
+    return AnalyticsProvider(
+        handlers: [
+          FirebaseAnalyticsHandler(),
+        ],
+        child : PostsRepositoryProvider(
+            postsRepository: PostsRepository(
+              localDataSource: LocalPostsDataSource(),
+              remoteDataSource: RemotePostsDataSource(),
             ),
-          ),
-        ),
-        routes: {
-          '/': (context) => const PostsScreen(),
-        },
-      )
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                textTheme: const TextTheme(
+                  bodySmall: TextStyle(
+                    fontSize: 20,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              routes: {
+                '/': (context) => const PostsScreen(),
+              },
+            )
+        )
     );
   }
 }
