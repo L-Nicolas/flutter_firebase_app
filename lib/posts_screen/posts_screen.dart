@@ -14,7 +14,7 @@ class PostsScreen extends StatelessWidget {
               title: const Text('Posts'),
             ),
             body: ListView.builder(
-                itemCount: 0,//posts.length,
+                itemCount: 1,//posts.length,
                 itemBuilder: (context, index) {
                   final post = new Post(id: "1", description: "description");//posts[index];
                   return PostItem(

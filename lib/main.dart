@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tp_flutter_firebase/posts_screen/data_sources/local_posts_data_source.dart';
+import 'package:tp_flutter_firebase/posts_screen/data_sources/remote_posts_data_source.dart';
+import 'package:tp_flutter_firebase/posts_screen/posts_repository_provider.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_screen.dart';
+import 'package:tp_flutter_firebase/posts_screen/repository/posts_repository.dart';
 
 void main() {
+  const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'test');
+  debugPrint('API_BASE_URL: $apiBaseUrl');
   runApp(const MyApp());
 }
 
@@ -10,19 +16,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          bodySmall: TextStyle(
-            fontSize: 20,
-            color: Colors.green,
+    return PostsRepositoryProvider(
+        postsRepository: PostsRepository(
+        localDataSource: LocalPostsDataSource(),
+        remoteDataSource: RemotePostsDataSource(),
+      ),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: const TextTheme(
+            bodySmall: TextStyle(
+              fontSize: 20,
+              color: Colors.green,
+            ),
           ),
         ),
-      ),
-      routes: {
-        '/': (context) => const PostsScreen(),
-      },
+        routes: {
+          '/': (context) => const PostsScreen(),
+        },
+      )
     );
   }
 }
