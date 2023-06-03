@@ -3,10 +3,12 @@ import 'dart:isolate';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/analytics/analytics_provider.dart';
 import 'package:tp_flutter_firebase/posts_screen/analytics/firebase_analytics_handler.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/local_posts_data_source.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/remote_posts_data_source.dart';
+import 'package:tp_flutter_firebase/posts_screen/post_bloc/post_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_repository_provider.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/repository/posts_repository.dart';
@@ -41,24 +43,27 @@ class MyApp extends StatelessWidget {
         handlers: [
           FirebaseAnalyticsHandler(),
         ],
-        child : PostsRepositoryProvider(
+        child: PostsRepositoryProvider(
             postsRepository: PostsRepository(
               localDataSource: LocalPostsDataSource(),
               remoteDataSource: RemotePostsDataSource(),
             ),
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                textTheme: const TextTheme(
-                  bodySmall: TextStyle(
-                    fontSize: 20,
-                    color: Colors.green,
+            child: BlocProvider(
+              create: (context) => PostBloc(),
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  textTheme: const TextTheme(
+                    bodySmall: TextStyle(
+                      fontSize: 20,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
+                routes: {
+                  '/': (context) => const PostsScreen(),
+                },
               ),
-              routes: {
-                '/': (context) => const PostsScreen(),
-              },
             )
         )
     );
