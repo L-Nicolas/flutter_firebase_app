@@ -32,9 +32,8 @@ class PostsScreen extends StatelessWidget {
                 itemCount: 1,//posts.length,
                 itemBuilder: (context, index) {
                   final post = Post(
-                    id: '1',
-                    description: 'description',
-                    createdAt: DateTime.now(),
+                      id: '1',
+                      body: 'description'
                   );
                   return PostItem(
                     post: post,

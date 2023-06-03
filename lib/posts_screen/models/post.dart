@@ -1,11 +1,9 @@
 class Post {
   final String id;
-  final String description;
-  final DateTime createdAt;
+  final String body;
 
   Post({
     required this.id,
-    required this.description,
-    required this.createdAt,
+    required this.body,
   });
 }
