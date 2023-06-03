@@ -10,9 +10,6 @@ import 'package:tp_flutter_firebase/posts_screen/repository/posts_repository.dar
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'test');
-  debugPrint('API_BASE_URL: $apiBaseUrl');
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
