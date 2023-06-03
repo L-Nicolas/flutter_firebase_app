@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:tp_flutter_firebase/posts_screen/models/post.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_item.dart';
@@ -9,6 +10,14 @@ class PostsScreen extends StatelessWidget {
 
   void _tapPost(BuildContext context, Post post) async {
     await AnalyticsProvider.of(context).setUserProperty('user', 'test');
+  }
+
+  void _crash() async {
+    try {
+      throw Exception('Coucou, ce crash est géré');
+    } catch (error, stackTrace) {
+      await FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    }
   }
 
   @override
@@ -29,7 +38,7 @@ class PostsScreen extends StatelessWidget {
                   );
                   return PostItem(
                     post: post,
-                    onTap: () => _tapPost(context, post)
+                    onTap: () => _crash() //_tapPost(context, post)
                   );
                 },
             )

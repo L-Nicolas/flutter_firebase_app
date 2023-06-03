@@ -37,6 +37,13 @@
             {
               "client_id": "991404450534-7ssknj9ihlhhtmb3df4gf92jv1ogeucc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "991404450534-uuja9ue7q5tr7r7bd1g8dsl2riga7baj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tpFlutterFirebase"
+              }
             }
           ]
         }
