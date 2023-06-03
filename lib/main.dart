@@ -13,9 +13,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        textTheme: const TextTheme(
+          bodySmall: TextStyle(
+            fontSize: 20,
+            color: Colors.green,
+          ),
+        ),
       ),
-      home: const PostsScreen(),
+      routes: {
+        '/': (context) => const PostsScreen(),
+      },
     );
   }
 }
