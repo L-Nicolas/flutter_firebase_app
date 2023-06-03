@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/product.dart';
+import 'models/post.dart';
 
 class PostItem extends StatelessWidget {
   final Post post;
@@ -14,8 +14,8 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("post.name"),
-      subtitle: Text(post.description),
+      title: Text(post.description),
+      subtitle: Text(post.createdAt.toString()),
       leading: Container(
         height: 50,
         width: 50,
