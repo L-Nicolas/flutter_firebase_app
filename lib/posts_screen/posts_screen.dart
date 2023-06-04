@@ -12,22 +12,6 @@ import 'analytics/analytics_provider.dart';
 class PostsScreen extends StatelessWidget {
   const PostsScreen({Key? key}) : super(key: key);
 
-  /*
-  * ListView.builder(
-                  itemCount: 1, //posts.length,
-                  itemBuilder: (context, index) {
-                    final post = Post(
-                        id: '1',
-                        body: 'description'
-                    );
-                    return PostItem(
-                        post: post,
-                        onTap: () => _crash() //_tapPost(context, post)
-                    );
-                  },
-                )
-  * */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +36,7 @@ class PostsScreen extends StatelessWidget {
 
                 if (posts.isEmpty) {
                   return const Center(
-                    child: Text('Aucun produit'),
+                    child: Text('Aucun post'),
                   );
                 }
 
@@ -80,8 +64,8 @@ class PostsScreen extends StatelessWidget {
                 onPressed: () {
                   //_onDeleteAllTap(context);
                 },
-                child: Icon(Icons.delete),
                 backgroundColor: Colors.grey,
+                child: const Icon(Icons.delete),
               ),
               SizedBox(width: 16),
               FloatingActionButton(
@@ -116,7 +100,6 @@ class PostsScreen extends StatelessWidget {
 
 
   void _onPostTap(BuildContext context, Post post) {
-    //await AnalyticsProvider.of(context).setUserProperty('user', 'test');
     PostDetailScreen.navigateTo(context, post);
   }
 

@@ -33,49 +33,13 @@ class PostDetailScreen extends StatelessWidget {
           children: [
             Text(
               post.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
               ),
             ),
-            /*const Spacer(),
-            Center(
-              child: BlocConsumer<PostBloc, PostState>(
-                listener: (context, state) {
-                  if (state.status == PostStatus.success) {
-                    _showSnackBar(context, 'Post ajouté');
-                    Navigator.of(context).pop();
-                  }
-                },
-                builder: (context, state) {
-                  switch (state.status) {
-                    case PostStatus.loading:
-                      return const CircularProgressIndicator();
-                    default:
-                      return _buildButton(context);
-                  }
-                },
-              ),
-            ),*/
           ],
         ),
       ),
     );
   }
-
-/*Widget _buildButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        BlocProvider.of<PostBloc>(context).add(AddPost(post));
-      },
-      child: const Text('Ajouter au panier'),
-    );
-  }
-
-  void _showSnackBar(BuildContext context, String text) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(text),
-      ),
-    );
-  }*/
 }

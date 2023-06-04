@@ -8,6 +8,8 @@ import '../posts_repository_provider.dart';
 class PostFormScreen extends StatefulWidget {
   static const String routeName = '/PostFromScreen';
 
+  const PostFormScreen({super.key});
+
   static void navigateTo(BuildContext context) {
     Navigator.of(context).pushNamed(routeName);
   }
@@ -39,7 +41,7 @@ class _PostFormState extends State<PostFormScreen> {
     await postsRepository.createPost(post);
     final posteBloc = BlocProvider.of<PostBloc>(context);
     posteBloc.add(GetAllPosts());
-    Navigator.of(context).pop();
+    //Navigator.of(context).pop();
   }
 
   @override
