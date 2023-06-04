@@ -82,7 +82,11 @@ class PostsScreen extends StatelessWidget {
                         );
                     }
                   },
-                )
+                ),
+                floatingActionButton: FloatingActionButton(
+                  child: const Icon(Icons.refresh),
+                  onPressed: () => print("add") //_onRefreshList(context),
+                ),
             );
           }
       ),
