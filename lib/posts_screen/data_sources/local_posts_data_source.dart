@@ -5,8 +5,12 @@ import '../models/post.dart';
 
 class LocalPostsDataSource extends PostsDataSource {
   @override
-  Future<List<Post>>  getPosts() {
+  Future<List<Post>> getPosts() {
     debugPrint('Getting posts from local data source');
     return Future.value([]);
+  }
+
+  Future<void> createPost(Post post) async {
+    debugPrint('Creating post in local data source');
   }
 }

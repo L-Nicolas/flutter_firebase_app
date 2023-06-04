@@ -69,10 +69,48 @@ class PostsScreen extends StatelessWidget {
             }
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => _onPlusTap(context),
-        ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  //_onDeleteAllTap(context);
+                },
+                child: Icon(Icons.delete),
+                backgroundColor: Colors.grey,
+              ),
+              SizedBox(width: 16),
+              FloatingActionButton(
+                onPressed: () {
+                  _onActualizeTap(context);
+                },
+                backgroundColor: Colors.blue,
+                child: const Icon(Icons.refresh),
+              ),
+              const SizedBox(width: 16),
+              FloatingActionButton(
+                onPressed: () {
+                  _onCrashTap();
+                },
+                backgroundColor: Colors.blue,
+                child: const Icon(Icons.car_crash),
+              ),
+              SizedBox(width: 16),
+              FloatingActionButton(
+                onPressed: () {
+                  _onPlusTap(context);
+                },
+                backgroundColor: Colors.grey,
+                child: const Icon(Icons.add),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -86,9 +124,13 @@ class PostsScreen extends StatelessWidget {
     PostFormScreen.navigateTo(context);
   }
 
-  void _crash() async {
+  void _onActualizeTap(BuildContext context) {
+    BlocProvider.of<PostBloc>(context).add(GetAllPosts());
+  }
+
+  void _onCrashTap() async {
     try {
-      throw Exception('Coucou, ce crash est géré');
+      throw Exception('Oh le crash de fou');
     } catch (error, stackTrace) {
       await FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }

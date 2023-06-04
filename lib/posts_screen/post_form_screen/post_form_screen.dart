@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../models/post.dart';
+import '../post_bloc/post_bloc.dart';
+import '../posts_repository_provider.dart';
 
 class PostFormScreen extends StatefulWidget {
   static const String routeName = '/PostFromScreen';
@@ -23,16 +28,18 @@ class _PostFormState extends State<PostFormScreen> {
     super.dispose();
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Vous pouvez envoyer les données du formulaire à votre backend ou effectuer d'autres actions ici
-      final title = _titleController.text;
-      final description = _descriptionController.text;
-
-      // Affichez les données dans la console pour cet exemple
-      print('Titre: $title');
-      print('Description: $description');
-    }
+  void _submitForm() async {
+    final title = _titleController.text;
+    final description = _descriptionController.text;
+    final post = Post(
+      title: title,
+      description: description,
+    );
+    final postsRepository = PostsRepositoryProvider.of(context).postsRepository;
+    await postsRepository.createPost(post);
+    final posteBloc = BlocProvider.of<PostBloc>(context);
+    posteBloc.add(GetAllPosts());
+    Navigator.of(context).pop();
   }
 
   @override

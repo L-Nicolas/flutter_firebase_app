@@ -20,4 +20,11 @@ class PostsRepository {
       return [];//posts;
     }
   }
+  Future<void> createPost(Post post) async {
+    try {
+      final posts = await remoteDataSource.createPost(post);
+    } catch (e) {
+      print("PostRepository: " + e.toString());
+    }
+  }
 }
