@@ -8,7 +8,9 @@ import 'package:tp_flutter_firebase/posts_screen/analytics/analytics_provider.da
 import 'package:tp_flutter_firebase/posts_screen/analytics/firebase_analytics_handler.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/local_posts_data_source.dart';
 import 'package:tp_flutter_firebase/posts_screen/data_sources/remote_posts_data_source.dart';
+import 'package:tp_flutter_firebase/posts_screen/models/post.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_bloc/post_bloc.dart';
+import 'package:tp_flutter_firebase/posts_screen/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_repository_provider.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/repository/posts_repository.dart';
@@ -62,6 +64,24 @@ class MyApp extends StatelessWidget {
                 ),
                 routes: {
                   '/': (context) => const PostsScreen(),
+                },
+                onGenerateRoute: (settings) {
+                  Widget content = const SizedBox.shrink();
+
+                  switch (settings.name) {
+                    case PostDetailScreen.routeName:
+                      final arguments = settings.arguments;
+                      if (arguments is Post) {
+                        content = PostDetailScreen(post: arguments);
+                      }
+                      break;
+                  }
+
+                  return MaterialPageRoute(
+                    builder: (context) {
+                      return content;
+                    },
+                  );
                 },
               ),
             )

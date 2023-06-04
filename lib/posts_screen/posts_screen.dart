@@ -3,24 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/models/post.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_bloc/post_bloc.dart';
+import 'package:tp_flutter_firebase/posts_screen/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_item.dart';
 
 import 'analytics/analytics_provider.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({Key? key}) : super(key: key);
-
-  void _tapPost(BuildContext context, Post post) async {
-    await AnalyticsProvider.of(context).setUserProperty('user', 'test');
-  }
-
-  void _crash() async {
-    try {
-      throw Exception('Coucou, ce crash est géré');
-    } catch (error, stackTrace) {
-      await FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    }
-  }
 
   /*
   * ListView.builder(
@@ -76,7 +65,7 @@ class PostsScreen extends StatelessWidget {
                             final post = posts[index];
                             return PostItem(
                               post: post,
-                              //onTap: () => _onProductTap(context, product),
+                              onTap: () => _onPostTap(context, post),
                             );
                           },
                         );
@@ -84,12 +73,26 @@ class PostsScreen extends StatelessWidget {
                   },
                 ),
                 floatingActionButton: FloatingActionButton(
-                  child: const Icon(Icons.refresh),
+                  child: const Icon(Icons.add),
                   onPressed: () => print("add") //_onRefreshList(context),
                 ),
             );
           }
       ),
     );
+  }
+
+
+  void _onPostTap(BuildContext context, Post post) {
+    //await AnalyticsProvider.of(context).setUserProperty('user', 'test');
+    PostDetailScreen.navigateTo(context, post);
+  }
+
+  void _crash() async {
+    try {
+      throw Exception('Coucou, ce crash est géré');
+    } catch (error, stackTrace) {
+      await FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    }
   }
 }
