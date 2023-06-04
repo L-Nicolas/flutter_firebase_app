@@ -3,11 +3,11 @@ import '../models/post.dart';
 
 class PostsRepository {
   final PostsDataSource remoteDataSource;
-  final PostsDataSource localDataSource;
+  //final PostsDataSource localDataSource;
 
   PostsRepository({
     required this.remoteDataSource,
-    required this.localDataSource,
+    //required this.localDataSource,
   });
 
   Future<List<Post>> getPost() async {
@@ -15,8 +15,9 @@ class PostsRepository {
       final posts = await remoteDataSource.getPosts();
       return posts;
     } catch (e) {
-      final posts = await localDataSource.getPosts();
-      return posts;
+      //final posts = await localDataSource.getPosts();
+      print("PostRepository: " + e.toString());
+      return [];//posts;
     }
   }
 }

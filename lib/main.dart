@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider<PostsRepository>(
             create: (context) => PostsRepository(
-              localDataSource: LocalPostsDataSource(),
               remoteDataSource: RemotePostsDataSource(),
             ),
             child: BlocProvider<PostBloc>(
