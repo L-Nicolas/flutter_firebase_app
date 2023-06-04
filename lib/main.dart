@@ -11,6 +11,7 @@ import 'package:tp_flutter_firebase/posts_screen/data_sources/remote_posts_data_
 import 'package:tp_flutter_firebase/posts_screen/models/post.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_bloc/post_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_detail_screen/post_detail_screen.dart';
+import 'package:tp_flutter_firebase/posts_screen/post_form_screen/post_form_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_repository_provider.dart';
 import 'package:tp_flutter_firebase/posts_screen/posts_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/repository/posts_repository.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
                 ),
                 routes: {
                   '/': (context) => const PostsScreen(),
+                  PostFormScreen.routeName: (context) => PostFormScreen(),
                 },
                 onGenerateRoute: (settings) {
                   Widget content = const SizedBox.shrink();

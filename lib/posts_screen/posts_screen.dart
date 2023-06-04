@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/models/post.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_bloc/post_bloc.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_detail_screen/post_detail_screen.dart';
+import 'package:tp_flutter_firebase/posts_screen/post_form_screen/post_form_screen.dart';
 import 'package:tp_flutter_firebase/posts_screen/post_item.dart';
 
 import 'analytics/analytics_provider.dart';
@@ -74,7 +75,7 @@ class PostsScreen extends StatelessWidget {
                 ),
                 floatingActionButton: FloatingActionButton(
                   child: const Icon(Icons.add),
-                  onPressed: () => print("add") //_onRefreshList(context),
+                  onPressed: () => _onPlusTap(context),
                 ),
             );
           }
@@ -86,6 +87,10 @@ class PostsScreen extends StatelessWidget {
   void _onPostTap(BuildContext context, Post post) {
     //await AnalyticsProvider.of(context).setUserProperty('user', 'test');
     PostDetailScreen.navigateTo(context, post);
+  }
+
+  void _onPlusTap(BuildContext context) {
+    PostFormScreen.navigateTo(context);
   }
 
   void _crash() async {
