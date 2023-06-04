@@ -27,4 +27,21 @@ class RemotePostsDataSource extends PostsDataSource {
     return posts;
   }
 
+  Future<void> createPost(String title, String description) async {
+    try {
+      final CollectionReference postsCollection =
+      FirebaseFirestore.instance.collection('posts');
+
+      await postsCollection.add({
+        'title': title,
+        'description': description,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      print('Post envoyé avec succès à Firestore');
+    } catch (e) {
+      print('Erreur lors de l\'envoi du post à Firestore: $e');
+    }
+  }
+
 }

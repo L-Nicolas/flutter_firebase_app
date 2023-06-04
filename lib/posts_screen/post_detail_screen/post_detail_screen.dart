@@ -31,17 +31,20 @@ class PostDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(post.description),
-            const Spacer(),
+            Text(
+              post.description,
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
+            /*const Spacer(),
             Center(
               child: BlocConsumer<PostBloc, PostState>(
                 listener: (context, state) {
-                  if (state.status == PostStatus.success/*updated*/) {
-                    _showSnackBar(context, 'Produit ajouté au panier');
+                  if (state.status == PostStatus.success) {
+                    _showSnackBar(context, 'Post ajouté');
                     Navigator.of(context).pop();
-                  }/* else if (state.status == CartStatus.error) {
-                    _showSnackBar(context, state.error ?? '');
-                  }*/
+                  }
                 },
                 builder: (context, state) {
                   switch (state.status) {
@@ -52,17 +55,18 @@ class PostDetailScreen extends StatelessWidget {
                   }
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),
     );
   }
 
-  //make this fonction onpressed make nothing
-  Widget _buildButton(BuildContext context) {
+/*Widget _buildButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        BlocProvider.of<PostBloc>(context).add(AddPost(post));
+      },
       child: const Text('Ajouter au panier'),
     );
   }
@@ -73,10 +77,5 @@ class PostDetailScreen extends StatelessWidget {
         content: Text(text),
       ),
     );
-  }
-
-  /*void _onAddToCart(BuildContext context) {
-    BlocProvider.of<PostBloc>(context).add(AddPost(post));
   }*/
 }
-
