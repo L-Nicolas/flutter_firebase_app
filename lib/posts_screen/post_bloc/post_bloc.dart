@@ -21,7 +21,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         final posts = List.generate(count, (index) {
           return Post(
             id: '$index',
-            body: 'Post $index',
+            title: 'Post $index',
+            description: 'Description $index',
           );
         });
         emit(state.copyWith(status: PostStatus.success, posts: posts));

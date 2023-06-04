@@ -14,7 +14,7 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(post.body),
+      title: Text(post.description),
       leading: Container(
         height: 50,
         width: 50,
