@@ -1,4 +1,5 @@
 import '../data_sources/posts_data_source.dart';
+import '../models/post.dart';
 
 class PostsRepository {
   final PostsDataSource remoteDataSource;
@@ -9,7 +10,7 @@ class PostsRepository {
     required this.localDataSource,
   });
 
-  Future<List<String>> getFruits() async {
+  Future<List<Post>> getPost() async {
     try {
       final posts = await remoteDataSource.getPosts();
       return posts;

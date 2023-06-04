@@ -1,3 +1,5 @@
+import '../models/post.dart';
+
 abstract class PostsDataSource {
-  Future<List<String>> getPosts();
+  Future<List<Post>> getPosts();
 }

@@ -30,56 +30,49 @@ class PostsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PostBloc()..add(GetAllPosts(10)),
-      child: Builder(
-          builder: (context) {
-            return Scaffold(
-                appBar: AppBar(
-                  title: const Text('Posts'),
-                ),
-                body: BlocBuilder<PostBloc,PostState>(
-                  builder: (context, state) {
-                    switch (state.status) {
-                      case PostStatus.initial:
-                        return const SizedBox();
-                      case PostStatus.loading:
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      case PostStatus.error:
-                        return Center(
-                          child: Text(state.error),
-                        );
-                      case PostStatus.success:
-                        final posts = state.posts;
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Posts'),
+        ),
+        body: BlocBuilder<PostBloc,PostState>(
+          builder: (context, state) {
+            switch (state.status) {
+              case PostStatus.initial:
+                return const SizedBox();
+              case PostStatus.loading:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              case PostStatus.error:
+                return Center(
+                  child: Text(state.error),
+                );
+              case PostStatus.success:
+                final posts = state.posts;
 
-                        if (posts.isEmpty) {
-                          return const Center(
-                            child: Text('Aucun produit'),
-                          );
-                        }
+                if (posts.isEmpty) {
+                  return const Center(
+                    child: Text('Aucun produit'),
+                  );
+                }
 
-                        return ListView.builder(
-                          itemCount: posts.length,
-                          itemBuilder: (context, index) {
-                            final post = posts[index];
-                            return PostItem(
-                              post: post,
-                              onTap: () => _onPostTap(context, post),
-                            );
-                          },
-                        );
-                    }
+                return ListView.builder(
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    final post = posts[index];
+                    return PostItem(
+                      post: post,
+                      onTap: () => _onPostTap(context, post),
+                    );
                   },
-                ),
-                floatingActionButton: FloatingActionButton(
-                  child: const Icon(Icons.add),
-                  onPressed: () => _onPlusTap(context),
-                ),
-            );
-          }
-      ),
+                );
+            }
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => _onPlusTap(context),
+        ),
     );
   }
 

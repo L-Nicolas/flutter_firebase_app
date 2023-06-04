@@ -42,17 +42,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnalyticsProvider(
-        handlers: [
-          FirebaseAnalyticsHandler(),
-        ],
-        child: PostsRepositoryProvider(
-            postsRepository: PostsRepository(
+    return RepositoryProvider<PostsRepository>(
+            create: (context) => PostsRepository(
               localDataSource: LocalPostsDataSource(),
               remoteDataSource: RemotePostsDataSource(),
             ),
-            child: BlocProvider(
-              create: (context) => PostBloc(),
+            child: BlocProvider<PostBloc>(
+              create: (context) => PostBloc(
+                repository: context.read<PostsRepository>(),
+              )..add(GetAllPosts()),
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
@@ -87,7 +85,7 @@ class MyApp extends StatelessWidget {
                 },
               ),
             )
-        )
+
     );
   }
 }

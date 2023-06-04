@@ -4,7 +4,5 @@ part of 'post_bloc.dart';
 abstract class PostEvent {}
 
 class GetAllPosts extends PostEvent {
-  final int count;
-
-  GetAllPosts(this.count);
+  GetAllPosts();
 }
